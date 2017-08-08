@@ -110,5 +110,5 @@ We can see from below picture, loss CNN is better than MLP. After training, i ca
 ![Fig.1](https://raw.github.com/tavgreen/cnn-and-dnn/master/file/ss.png?raw=true "MLP vs CNN") 
 
 ## References ##
-[CS231N](optimization-2/)
-[Pytorch Example](https://github.com/pytorch/examples)
+- [CS231N](optimization-2/)
+- [Pytorch Example](https://github.com/pytorch/examples)
