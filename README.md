@@ -106,5 +106,8 @@ for epoch in range(int(args['epoch'])): # train epoch = 10
 		test_loss /= len(test_loader.dataset) #compute test loss
 		print('\nAverage Loss: {:.4f}, Accuracy: {:.0f}'.format(test_loss,  100. * correct / len(test_loader.dataset)))
 ```
+## Result ##
+![Fig.1](https://raw.github.com/tavgreen/landuse_classification/master/file/ss.png?raw=true "MLP vs CNN") 
+
 ## References ##
 
