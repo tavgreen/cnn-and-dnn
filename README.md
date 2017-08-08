@@ -1,8 +1,19 @@
 # Convolutional Neural Network and Multi Layer Perceptron #
 ## Description ##
-in this tutorial, i would like to discuss about Convolutional Neural Network (CNN) and Multi Layer Perceptron (MLP) and its implementation in **Pytroch**.  I move to pytorch because i need dynamic structure of neural network, it means we don't need to define computational graph and running the Graph like in Tensorflow. Both Tensorflow and Pytorch has plus minus respectively. MNIST dataset will be used in this tutorial. 
+in this tutorial, i would like to discuss about Convolutional Neural Network (CNN) and Multi Layer Perceptron (MLP) or sometimes called Deep Neural Network (DNN) and its implementation in **Pytroch**.  I move to pytorch because i need a dynamic structure of neural network, it means we don't need to define computational graph and running the Graph like in Tensorflow. Both Tensorflow and Pytorch has plus minus respectively. MNIST dataset will be used in this tutorial. 
 
 ## CNN vs MLP ##
+Convolutional Neural Network (CNN) consists of Convolutional Layer, Pooling Layer and Fully Connected Layer. in Convolutional Layer, the kernel(collection of weight) will scan input data with particular stride(moving step) like below picture. 
+
+![Fig.1](https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Conv_layer.png/229px-Conv_layer.png "CNN Convolutional")
+![Fig.2](https://raw.github.com/tavgreen/landuse_classification/master/file/cnn.png?raw=true "CNN")
+
+in above picture, input data is MNIST dataset with size 28x28. data will be put into convolutional layer -> max pooling layer and so on. in Fully connected layer, the data will be changed into flat size (one dimension) and enter into next layer until shrink into output layer which is consists of 10 class.
+
+Multilayer Perceptron (MLP) or DNN consists of fully connected layers that connected each other like below picture:
+![Fig.2](http://neuroph.sourceforge.net/tutorials/images/MLP.jpg "MLP")
+
+input MNIST data from 28x28 pixel will be changed into flat data (784 pixel). each pixels occupy one neuron in input and forward through network until shrink into 10 class.
 
 ## Program ##
 - Import Library
