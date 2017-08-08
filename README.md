@@ -1,6 +1,6 @@
 # Convolutional Neural Network and Multi Layer Perceptron #
 ## Description ##
-in this tutorial, i would like to discuss about Convolutional Neural Network (CNN) and Multi Layer Perceptron (MLP) and its implementation in ** Pytroch **.  I move to pytorch because i need dynamic structure of neural network, it means we don't need to define computational graph and running the Graph like in Tensorflow. Both Tensorflow and Pytorch has plus minus respectively. MNIST dataset will be used in this tutorial. 
+in this tutorial, i would like to discuss about Convolutional Neural Network (CNN) and Multi Layer Perceptron (MLP) and its implementation in **Pytroch**.  I move to pytorch because i need dynamic structure of neural network, it means we don't need to define computational graph and running the Graph like in Tensorflow. Both Tensorflow and Pytorch has plus minus respectively. MNIST dataset will be used in this tutorial. 
 
 ## CNN vs MLP ##
 
@@ -15,7 +15,7 @@ from torch.autograd import Variable #import variable that connect to automatic d
 from torchvision import datasets, transforms #import torchvision for datasets and transform
 import argparse
 ```
-- Defining Multilayer Perceptron Model
+- Defining Multilayer Perceptron Model Class
 ```python
 class DNN(nn.Module):
 	def __init__(self):
@@ -32,7 +32,7 @@ class DNN(nn.Module):
 		layer4 = self.relu(self.fc3(layer3)) #layer4 = layer3 -> fc2 -> relu
 		return F.log_softmax(layer4) #softmax activation to layer4
 ```
-- Defining Convolutional Neural Network Model
+- Defining Convolutional Neural Network Model Class
 ```python
 class CNN(nn.Module):
 	def __init__(self):
@@ -53,6 +53,58 @@ class CNN(nn.Module):
 		layer5 = self.fc2(layer4) #layer5 = layer4 -> fc2
 		return F.log_softmax(layer5) #softmax activation to layer5
 
+```
+- Defining Dataset Class
+```python
+class Dataset:
+	def read(self):
+		#load train and test loader that the range will be normalized into 0-1, batch size=1000 and shuffle the data
+		train_loader = torch.utils.data.DataLoader( 
+			datasets.MNIST('dataset/',train=True, download=False, 
+				 transform=transforms.Compose([transforms.ToTensor(),transforms.Normalize((0.1307,), (0.3081,))])),
+				 batch_size=1000, shuffle=True)
+		test_loader = torch.utils.data.DataLoader(
+			datasets.MNIST('dataset/',train=False, 
+				 transform=transforms.Compose([transforms.ToTensor(),transforms.Normalize((0.1307,), (0.3081,))])),
+				 batch_size=1000, shuffle=True)
+		return train_loader, test_loader
+```
+- select model
+```python
+model = CNN() #or you can choose: model = DNN()
+```
+- read dataset
+```python
+train_loader,test_loader = Dataset().read() #read dataset from Dataset class that we've defined before and store into train_loader and test_loader
+```
+- Define Optimizer
+```python
+optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9) #load optimizer Stochastic Gradient Descent with momentum 0.9 and learning rate 0.01
+```
+- Loop per epoch and Update Weight
+```python
+for epoch in range(int(args['epoch'])): # train epoch = 10
+		model.train() #training
+		for batch_idx, (data, label) in enumerate(train_loader): #enumerate train_loader per batch-> index, (data, label) ex: 0, (img1, 4)... 1, (img2, 2)
+			data, label = Variable(data), Variable(label) #create torch variable and enter each data and label into it
+			optimizer.zero_grad()
+			output = model(data) #enter data into model, save in output
+			train_loss = F.nll_loss(output, label) #nll = negative log likehood loss between output and label. it useful for classification problem with n class
+			train_loss.backward() #compute gradient
+			optimizer.step() #update weight
+			if batch_idx % 10 == 0: #display step
+				print('Train Epochs: {}, Loss: {:.6f} '.format(epoch, train_loss.data[0] )) #print
+		model.eval() #evaluation/testing
+		test_loss = 0
+		correct = 0
+		for data, label in test_loader: #separate data and label
+			data, label = Variable(data,volatile=True), Variable(label) #create torch variable and enter data and label into it
+			output = model(data) #enter data into model, save in output
+			test_loss += F.nll_loss(output, label, size_average=False).data[0] #
+			pred = output.data.max(1, keepdim=True)[1] #prediction result
+			correct += pred.eq(label.data.view_as(pred)).cpu().sum() #if label=pred then correct++
+		test_loss /= len(test_loader.dataset) #compute test loss
+		print('\nAverage Loss: {:.4f}, Accuracy: {:.0f}'.format(test_loss,  100. * correct / len(test_loader.dataset)))
 ```
 ## References ##
 
