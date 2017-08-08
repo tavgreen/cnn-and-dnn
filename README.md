@@ -11,6 +11,7 @@ Convolutional Neural Network (CNN) consists of Convolutional Layer, Pooling Laye
 in above picture, input data is MNIST dataset with size 28x28. data will be put into convolutional layer -> max pooling layer and so on. in Fully connected layer, the data will be changed into flat size (one dimension) and enter into next layer until shrink into output layer which is consists of 10 class.
 
 Multilayer Perceptron (MLP) or DNN consists of fully connected layers that connected each other like below picture:
+
 ![Fig.2](http://neuroph.sourceforge.net/tutorials/images/MLP.jpg "MLP")
 
 input MNIST data from 28x28 pixel will be changed into flat data (784 pixel). each pixels occupy one neuron in input and forward through network until shrink into 10 class.
@@ -118,6 +119,7 @@ for epoch in range(int(args['epoch'])): # train epoch = 10
 ```
 ## Result ##
 We can see from below picture, loss CNN is better than MLP. After training, i can produce accuracy 96% with CNN and 86 with MLP.
+
 ![Fig.1](https://raw.github.com/tavgreen/cnn-and-dnn/master/file/ss.png?raw=true "MLP vs CNN") 
 
 ## References ##
