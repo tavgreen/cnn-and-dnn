@@ -13,7 +13,6 @@ import torch.nn.functional as F #import functional neural network module
 import torch.optim as optim #import optimizer neural network module
 from torch.autograd import Variable #import variable that connect to automatic differentiation
 from torchvision import datasets, transforms #import torchvision for datasets and transform
-import argparse
 ```
 - Defining Multilayer Perceptron Model Class
 ```python
@@ -107,7 +106,9 @@ for epoch in range(int(args['epoch'])): # train epoch = 10
 		print('\nAverage Loss: {:.4f}, Accuracy: {:.0f}'.format(test_loss,  100. * correct / len(test_loader.dataset)))
 ```
 ## Result ##
+We can see from below picture, loss CNN is better than MLP. After training, i can produce accuracy 96% with CNN and 86 with MLP.
 ![Fig.1](https://raw.github.com/tavgreen/cnn-and-dnn/master/file/ss.png?raw=true "MLP vs CNN") 
 
 ## References ##
-
+[CS231N](optimization-2/)
+[Pytorch Example](https://github.com/pytorch/examples)
