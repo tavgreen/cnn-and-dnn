@@ -1,4 +1,4 @@
-# Convolutional Neural Network and Multi Layer Perceptron #
+# Convolutional Neural Network and Multi Layer Perceptron in Pytorch #
 ## Description ##
 in this tutorial, i would like to discuss about Convolutional Neural Network (CNN) and Multi Layer Perceptron (MLP) or sometimes called Deep Neural Network (DNN) and its implementation in **Pytroch**.  I move to pytorch because i need a dynamic structure of neural network, it means we don't need to define computational graph and running the Graph like in Tensorflow. Both Tensorflow and Pytorch has plus minus respectively. MNIST dataset will be used in this tutorial. 
 
@@ -125,3 +125,4 @@ We can see from below picture, loss CNN is better than MLP. After training, i ca
 ## References ##
 - [CS231N](optimization-2/)
 - [Pytorch Example](https://github.com/pytorch/examples)
+- [Pytorch](http://pytorch.org/)
